@@ -20,53 +20,50 @@ Ana Luisa Giaquinto Zólio RM99348
 ---
 
 ## Diagrama Simplificado das Entidades
++--------------------+
+|       LIVRO        |
++--------------------+
+| ISBN : string (PK) |
+| Titulo : string    |
+| Autor : string     |
+| Categoria : enum   | -> {FICCAO, TECNICO, DIDATICO}
+| Status : enum      | -> {DISPONIVEL, EMPRESTADO, RESERVADO}
+| DataCadastro : DateTime |
++---------+----------+
+          |
+          | 1..*
+          |
++---------v----------+
+|    EMPRESTIMO      |
++--------------------+
+| Id : int (PK)      |
+| ISBNLivro : string | -> LIVRO.ISBN
+| IdUsuario : int    | -> USUARIO.Id
+| DataEmprestimo : DateTime |
+| DataPrevista : DateTime  |
+| DataDevolucao : DateTime? |
+| Status : enum      | -> {ATIVO, FINALIZADO, ATRASADO}
++---------+----------+
+          |
+          | 0..1
+          |
++---------v----------+
+|       MULTA        |
++--------------------+
+| IdEmprestimo : int (PK, FK) | -> EMPRESTIMO.Id
+| Valor : decimal             |
+| Status : enum               | -> {PENDENTE, PAGA}
++-----------------------------+
 
-┌──────────────────────────┐
-│         LIVRO            │
-├──────────────────────────┤
-│ ISBN : string (PK)    │
-│ Titulo : string          │
-│ Autor : string           │
-│ Categoria : enum         │ → {FICCAO, TECNICO, DIDATICO}
-│ Status : enum            │ → {DISPONIVEL, EMPRESTADO, RESERVADO}
-│ DataCadastro : DateTime  │
-└──────────────┬───────────┘
-               │ 1
-               │
-               │ *
-┌──────────────▼───────────┐
-│       EMPRESTIMO         │
-├──────────────────────────┤
-│ Id : int (PK)         │
-│ ISBNLivro : string (FK)  │ → LIVRO.ISBN
-│ IdUsuario : int (FK)     │ → USUARIO.Id
-│ DataEmprestimo : DateTime│
-│ DataPrevista : DateTime  │
-│ DataDevolucao : DateTime?│
-│ Status : enum            │ → {ATIVO, FINALIZADO, ATRASADO}
-└──────────────┬───────────┘
-               │ 1
-               │
-               │ 0..1
-┌──────────────▼───────────┐
-│          MULTA           │
-├──────────────────────────┤
-│ IdEmprestimo : int (PK, FK) │ → EMPRESTIMO.Id
-│ Valor : decimal          │
-│ Status : enum             │ → {PENDENTE, PAGA}
-└──────────────────────────┘
-
-
-┌──────────────────────────┐
-│         USUARIO          │
-├──────────────────────────┤
-│ Id : int (PK)         │
-│ Nome : string            │
-│ Email : string           │
-│ Tipo : enum              │ → {ALUNO, PROFESSOR, FUNCIONARIO}
-│ DataCadastro : DateTime  │
-└──────────────────────────┘
-
++--------------------+
+|      USUARIO       |
++--------------------+
+| Id : int (PK)      |
+| Nome : string      |
+| Email : string     |
+| Tipo : enum        | -> {ALUNO, PROFESSOR, FUNCIONARIO}
+| DataCadastro : DateTime |
++--------------------+
 
 ---
 
