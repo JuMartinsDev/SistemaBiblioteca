@@ -20,50 +20,9 @@ Ana Luisa Giaquinto Zólio RM99348
 ---
 
 ## Diagrama Simplificado das Entidades
-+--------------------+
-|       LIVRO        |
-+--------------------+
-| ISBN : string (PK) |
-| Titulo : string    |
-| Autor : string     |
-| Categoria : enum   | -> {FICCAO, TECNICO, DIDATICO}
-| Status : enum      | -> {DISPONIVEL, EMPRESTADO, RESERVADO}
-| DataCadastro : DateTime |
-+---------+----------+
-          |
-          | 1..*
-          |
-+---------v----------+
-|    EMPRESTIMO      |
-+--------------------+
-| Id : int (PK)      |
-| ISBNLivro : string | -> LIVRO.ISBN
-| IdUsuario : int    | -> USUARIO.Id
-| DataEmprestimo : DateTime |
-| DataPrevista : DateTime  |
-| DataDevolucao : DateTime? |
-| Status : enum      | -> {ATIVO, FINALIZADO, ATRASADO}
-+---------+----------+
-          |
-          | 0..1
-          |
-+---------v----------+
-|       MULTA        |
-+--------------------+
-| IdEmprestimo : int (PK, FK) | -> EMPRESTIMO.Id
-| Valor : decimal             |
-| Status : enum               | -> {PENDENTE, PAGA}
-+-----------------------------+
+(print pois no read me o layout do diagrama é desconfigurado)
 
-+--------------------+
-|      USUARIO       |
-+--------------------+
-| Id : int (PK)      |
-| Nome : string      |
-| Email : string     |
-| Tipo : enum        | -> {ALUNO, PROFESSOR, FUNCIONARIO}
-| DataCadastro : DateTime |
-+--------------------+
+<img width="583" height="828" alt="image" src="https://github.com/user-attachments/assets/9d568a58-d4e4-4f6a-aca5-465085ab1292" />
 
 ---
 
