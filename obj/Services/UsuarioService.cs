@@ -25,7 +25,10 @@ namespace BibliotecaApp.Services
             var emprestimosAtivos = _context.Emprestimos
                 .Count(e => e.UsuarioId == usuarioId && e.Status == StatusEmprestimo.ATIVO);
 
-            return emprestimosAtivos < 3;
+            var temMultaPendente = _context.Multas
+                .Any(m => m.Emprestimo.UsuarioId == usuarioId && m.Status == StatusMulta.PENDENTE);
+
+            return emprestimosAtivos < 3 && !temMultaPendente;
         }
     }
 }
